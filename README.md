@@ -2,14 +2,16 @@
  * @Author: hiddenSharp429 z404878860@163.com
  * @Date: 2024-11-04 18:35:53
  * @LastEditors: hiddenSharp429 z404878860@163.com
- * @LastEditTime: 2024-11-16 22:05:00
+ * @LastEditTime: 2024-11-16 22:14:29
 -->
 # CG
 
 This is a course assignment repository for the Shantou University computer elective course "Computer Graphics"! Hope it can help you!
+
 这是一个用于存放学校课程《计算机图形学》中课程作业的仓库，仅是个人思路，并且仅供参考，可用于学习交流，请勿用于其他用途。
 
 The following are the task descriptions for each assignment:
+
 以下是各作业的任务说明：
 
 ## Assignment 1
