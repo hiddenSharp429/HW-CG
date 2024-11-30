@@ -52,3 +52,10 @@ effect, use different shades of red and yellow (and perhaps green) for the point
 > 2. Modify the program in Exercise 27 to have the square rotate clockwise about its own center as it moves along its path. The square should complete one revolution about its center for each quarter of its path around the window that it completes. Use only basic OpenGL geometric transformations to do this.
 
 - 文件夹：`assignment 5`
+
+## Assignment 6
+- 任务：完成以下目标并且提交相关文件。
+> 1. Modify the program example on textbook, p273 (Two-Dimensional Viewing.pdf, pp16-17) to achieve zooming effect by successively mapping different size of clipping window (by changing gluOrtho2D parameters) onto a fixed-sized viewport.
+> 2. Write a procedure to calculate the elements of matrix 1 for transforming two-dimensionalworld coordinates to viewing coordinates,giventhe viewing coordinate origin P0 and the view upvector V. Test your matrix with p0=(1,2), V=(3,-4) and output your result to screen.
+> 3. Write a complete program to implement theCohen-Sutherland line-clipping algorithm.
+- 文件夹：`assignment 6`
