@@ -10,10 +10,10 @@ This is a course assignment repository for the Shantou University computer elect
 
 这是一个用于存放学校课程《计算机图形学》中课程作业的仓库，仅是个人思路，并且仅供参考，可用于学习交流，请勿用于其他用途。
 
+# Assignments
 The following are the task descriptions for each assignment:
 
 以下是各作业的任务说明：
-
 ## Assignment 1
 - 任务：回答以下问题并且提交相关文件
 > 1. What are raster graphics and vector graphics? What features they have, respectively?
@@ -59,3 +59,13 @@ effect, use different shades of red and yellow (and perhaps green) for the point
 > 2. Write a procedure to calculate the elements of matrix 1 for transforming two-dimensionalworld coordinates to viewing coordinates,giventhe viewing coordinate origin P0 and the view upvector V. Test your matrix with p0=(1,2), V=(3,-4) and output your result to screen.
 > 3. Write a complete program to implement theCohen-Sutherland line-clipping algorithm.
 - 文件夹：`assignment 6`
+
+# Projects
+The following are the task descriptions for each project:
+
+以下是各项目的任务说明:
+## Project 1
+- 任务：完成以下目标并且提交相关文件。
+> 1. Design and implement a screensaver with OpenGL functions of output primitives (points, lines and fill areas), attributes and transformations.Example:
+
+![alt text](img/project1.png)
