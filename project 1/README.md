@@ -1,20 +1,59 @@
-# Screen saver view
+# OpenGL Screensaver
 
-## Project Structure
-```
-project 1/
-├── screensaver.cpp    # 跨平台 OpenGL 实现
-├── screensaver.h      # 跨平台版本的头文件
-├── OpenGLScreenSaverView.m  # macOS 原生实现
-├── OpenGLScreenSaverView.h  # macOS 原生版本的头文件
-├── Info.plist         # macOS 屏幕保护程序配置
-└── Makefile          # 构建脚本
+A cross-platform screensaver that displays animated shapes using OpenGL.
+
+## Features
+- Draws stars and circles with different colors
+- Smooth animations with rotation and movement
+- Cross-platform support (Windows and macOS)
+- Built using modern C++ and OpenGL
+
+## Prerequisites
+- CMake (version 3.10 or higher)
+- C++ compiler with C++11 support
+- GLFW3
+- OpenGL
+
+### Installing Dependencies
+
+#### macOS
+```bash
+brew install cmake glfw
 ```
 
-## Compiling and Running
-- make standalone - 编译跨平台版本（生成可执行文件 screensaver）
-- make native - 编译 macOS 原生屏幕保护程序（生成 .saver 包）
-- make all - 同时编译两个版本
-- make install - 安装 macOS 屏幕保护程序到系统
-- make clean - 清理编译产物
-- make native install -编译并安装
+#### Windows
+1. Install CMake from https://cmake.org/download/
+2. Install GLFW using vcpkg:
+```bash
+vcpkg install glfw3:x64-windows
+```
+
+## Building
+
+1. Create a build directory:
+```bash
+mkdir build
+cd build
+```
+
+2. Generate build files:
+```bash
+cmake ..
+```
+
+3. Build the project:
+```bash
+cmake --build .
+```
+
+## Running
+After building, run the screensaver:
+```bash
+./screensaver
+```
+
+## Controls
+- Press ESC to exit the screensaver
+
+## License
+This project is open source and available under the MIT License.

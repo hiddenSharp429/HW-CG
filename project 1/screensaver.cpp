@@ -1,163 +1,150 @@
-#ifdef __APPLE__
-#include <GLUT/glut.h>
-#else
-#include <GL/glut.h>
-#endif
-
+#include <GLFW/glfw3.h>
 #include <cmath>
-#include <cstdlib>
+#include <vector>
+#include <random>
+#include <ctime>
 
-float rotation = 0.0f;
-float scale = 1.0f;
-float scaleDir = 0.001f;
-float colors[3] = {1.0f, 0.0f, 0.0f}; // RGB colors
-const float PI = 3.14159265359f;
-int windowWidth = 800;
-int windowHeight = 600;
+class Shape {
+protected:
+    float x, y, rotation, scale;
+    float r, g, b;
+    float speed, rotationSpeed;
+public:
+    Shape(float x, float y);
+    virtual void draw() = 0;
+    virtual void update();
+};
 
-// Function to change colors smoothly
-void updateColors() {
-    static float delta[3] = {0.005f, 0.007f, 0.003f};
-    for (int i = 0; i < 3; i++) {
-        colors[i] += delta[i];
-        if (colors[i] >= 1.0f || colors[i] <= 0.0f) {
-            delta[i] = -delta[i];
-        }
-    }
+class Star : public Shape {
+    float points, innerRadius, outerRadius;
+public:
+    Star(float x, float y);
+    void draw() override;
+};
+
+class Circle : public Shape {
+    float radius;
+    int segments;
+public:
+    Circle(float x, float y);
+    void draw() override;
+};
+
+std::vector<Shape*> shapes;
+
+// Shape implementation
+Shape::Shape(float x, float y) : x(x), y(y), rotation(0), scale(1.0f) {
+    r = static_cast<float>(rand()) / RAND_MAX;
+    g = static_cast<float>(rand()) / RAND_MAX;
+    b = static_cast<float>(rand()) / RAND_MAX;
+    speed = (rand() % 100) / 1000.0f + 0.01f;
+    rotationSpeed = (rand() % 100) / 1000.0f + 0.01f;
 }
 
-// Draw a star using lines
-void drawStar(float x, float y, float size) {
+void Shape::update() {
+    rotation += rotationSpeed;
+    if(rotation > 360.0f) rotation -= 360.0f;
+    
+    x += speed;
+    if(x > 1.0f || x < -1.0f) speed = -speed;
+}
+
+// Star implementation
+Star::Star(float x, float y) : Shape(x, y), points(5), innerRadius(0.02f), outerRadius(0.05f) {}
+
+void Star::draw() {
     glPushMatrix();
     glTranslatef(x, y, 0.0f);
+    glRotatef(rotation, 0.0f, 0.0f, 1.0f);
     glScalef(scale, scale, 1.0f);
     
-    glBegin(GL_LINES);
-    for (int i = 0; i < 5; i++) {
-        float angle1 = (72.0f * i - rotation) * PI / 180.0f;
-        float angle2 = (72.0f * (i + 2) - rotation) * PI / 180.0f;
-        
-        float x1 = size * cos(angle1);
-        float y1 = size * sin(angle1);
-        float x2 = size * cos(angle2);
-        float y2 = size * sin(angle2);
-        
-        glVertex2f(x1, y1);
-        glVertex2f(x2, y2);
+    glColor3f(r, g, b);
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex2f(0.0f, 0.0f);  // center point
+    
+    for(int i = 0; i <= points * 2; i++) {
+        float radius = (i % 2 == 0) ? outerRadius : innerRadius;
+        float angle = i * M_PI / points;
+        glVertex2f(cos(angle) * radius, sin(angle) * radius);
     }
     glEnd();
-    
     glPopMatrix();
 }
 
-// Draw a polygon
-void drawPolygon(float x, float y, float size, int sides) {
+// Circle implementation
+Circle::Circle(float x, float y) : Shape(x, y), radius(0.05f), segments(32) {}
+
+void Circle::draw() {
     glPushMatrix();
     glTranslatef(x, y, 0.0f);
-    glRotatef(-rotation * 0.5f, 0.0f, 0.0f, 1.0f);
+    glRotatef(rotation, 0.0f, 0.0f, 1.0f);
     glScalef(scale, scale, 1.0f);
     
-    glBegin(GL_POLYGON);
-    for (int i = 0; i < sides; i++) {
-        float angle = (360.0f / sides * i) * PI / 180.0f;
-        float xPos = size * cos(angle);
-        float yPos = size * sin(angle);
-        glVertex2f(xPos, yPos);
+    glColor3f(r, g, b);
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex2f(0.0f, 0.0f);  // center point
+    
+    for(int i = 0; i <= segments; i++) {
+        float angle = i * 2.0f * M_PI / segments;
+        glVertex2f(cos(angle) * radius, sin(angle) * radius);
     }
     glEnd();
-    
     glPopMatrix();
 }
 
-void display() {
-    glClear(GL_COLOR_BUFFER_BIT);
-    glLoadIdentity();
-    
-    // Center the view
-    float aspect = (float)windowWidth / (float)windowHeight;
-    if (windowWidth >= windowHeight) {
-        gluOrtho2D(-1.0 * aspect, 1.0 * aspect, -1.0, 1.0);
-    } else {
-        gluOrtho2D(-1.0, 1.0, -1.0 / aspect, 1.0 / aspect);
+void initShapes() {
+    for(int i = 0; i < 10; i++) {
+        float x = (static_cast<float>(rand()) / RAND_MAX) * 2.0f - 1.0f;
+        float y = (static_cast<float>(rand()) / RAND_MAX) * 2.0f - 1.0f;
+        
+        if(i % 2 == 0)
+            shapes.push_back(new Star(x, y));
+        else
+            shapes.push_back(new Circle(x, y));
     }
-    
-    // Update colors
-    updateColors();
-    
-    // Update scale
-    scale += scaleDir;
-    if (scale > 1.1f || scale < 0.9f) {
-        scaleDir = -scaleDir;
-    }
-    
-    // Draw rotating star
-    glColor3f(colors[0], colors[1], colors[2]);
-    drawStar(0.0f, 0.0f, 0.5f);
-    
-    // Draw rotating hexagon
-    glColor3f(colors[1], colors[2], colors[0]);
-    drawPolygon(0.0f, 0.0f, 0.3f, 6);
-    
-    // Draw points in a circular pattern
-    glPushMatrix();
-    glTranslatef(0.0f, 0.0f, 0.0f);
-    glScalef(scale, scale, 1.0f);
-    
-    glPointSize(3.0f);
-    glColor3f(colors[2], colors[0], colors[1]);
-    glBegin(GL_POINTS);
-    for (int i = 0; i < 36; i++) {
-        float angle = (10.0f * i + rotation) * PI / 180.0f;
-        float x = 0.7f * cos(angle);
-        float y = 0.7f * sin(angle);
-        glVertex2f(x, y);
-    }
-    glEnd();
-    
-    glPopMatrix();
-    
-    rotation += 0.5f;
-    if (rotation >= 360.0f) {
-        rotation -= 360.0f;
-    }
-    
-    glutSwapBuffers();
 }
 
-void timer(int value) {
-    glutPostRedisplay();
-    glutTimerFunc(16, timer, 0); // ~60 FPS
-}
-
-void reshape(int w, int h) {
-    windowWidth = w;
-    windowHeight = h;
-    glViewport(0, 0, w, h);
+int main() {
+    if (!glfwInit()) return -1;
+    
+    GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL Screensaver", nullptr, nullptr);
+    if (!window) {
+        glfwTerminate();
+        return -1;
+    }
+    
+    glfwMakeContextCurrent(window);
+    
+    // Initialize random seed
+    srand(static_cast<unsigned>(time(nullptr)));
+    
+    // Initialize shapes
+    initShapes();
+    
+    // Setup viewport and projection
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+    float ratio = width / (float)height;
+    
+    glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
+    glOrtho(-ratio, ratio, -1.0f, 1.0f, -1.0f, 1.0f);
     
-    float aspect = (float)w / (float)h;
-    if (w >= h) {
-        gluOrtho2D(-1.0 * aspect, 1.0 * aspect, -1.0, 1.0);
-    } else {
-        gluOrtho2D(-1.0, 1.0, -1.0 / aspect, 1.0 / aspect);
+    while (!glfwWindowShouldClose(window)) {
+        // Update and render shapes
+        for(auto shape : shapes) {
+            shape->update();
+            shape->draw();
+        }
+        
+        glfwSwapBuffers(window);
+        glfwPollEvents();
     }
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-}
-
-int main(int argc, char** argv) {
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-    glutInitWindowSize(windowWidth, windowHeight);
-    glutCreateWindow("OpenGL Screensaver");
     
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    
-    glutDisplayFunc(display);
-    glutReshapeFunc(reshape);
-    glutTimerFunc(0, timer, 0);
-    
-    glutMainLoop();
+    // Cleanup
+    for(auto shape : shapes) delete shape;
+    shapes.clear();
+    glfwTerminate();
     return 0;
 }
