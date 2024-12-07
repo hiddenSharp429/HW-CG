@@ -60,6 +60,13 @@ effect, use different shades of red and yellow (and perhaps green) for the point
 > 3. Write a complete program to implement theCohen-Sutherland line-clipping algorithm.
 - 文件夹：`assignment 6`
 
+## Assignment 7
+- 任务：完成以下目标并且提交相关文件。
+> 1. Describe the differences between 2D transformation (translation, scaling, and rotation) and 3D transformations (translation, scaling, and rotation).
+
+
+- 文件夹：`assignment 7`
+
 # Projects
 The following are the task descriptions for each project:
 
