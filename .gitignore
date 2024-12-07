@@ -2,3 +2,7 @@
 .DS_Store
 
 project 1/OpenGLScreensaver.saver/
+
+project 1/build/
+
+project 1/deps/glfw-3.4.bin.WIN64/
