@@ -67,6 +67,13 @@ effect, use different shades of red and yellow (and perhaps green) for the point
 
 - 文件夹：`assignment 7`
 
+## Assignment 8
+- 任务：完成以下目标并且提交相关文件。
+> 1. Explain the meaning of parameters in color model: RGB, CMY, HSV, and the main use of each color model.
+> 2. Describle the relation between CMY and RGB.
+
+- 文件夹：`assignment 8`
+
 # Projects
 The following are the task descriptions for each project:
 
