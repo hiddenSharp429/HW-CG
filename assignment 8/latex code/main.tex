@@ -1,0 +1,289 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% main.tex
+% STU课程报告模板正文
+% 作者：ZiXian-Zhu
+% 该模板仓库地址GitHub：https://github.com/hiddenSharp429/STU_report_template
+% 参考来源：中科院论文模板、上海交通大学课程论文模板
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt]{article}
+
+\usepackage{STUReport}
+\usepackage{xcolor}
+\usepackage{tabulary}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usetikzlibrary{shapes,arrows,positioning}
+
+% 新增颜色定义
+\definecolor{highlight}{RGB}{135,206,250} 
+\definecolor{important}{RGB}{255,0,0}
+\definecolor{note}{RGB}{0,128,0}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% 定义C#语言
+\lstdefinelanguage{csharp}{
+  language=[Sharp]C,
+  morekeywords={var,string,get,set,class,namespace,new,using,this,public,private,protected,virtual,override},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+}
+
+% 定义JavaScript语言
+\lstdefinelanguage{js}{
+  keywords={break,case,catch,continue,debugger,default,delete,do,else,false,finally,for,function,if,in,instanceof,new,null,return,switch,this,throw,true,try,typeof,var,void,while,with},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  sensitive=true
+}
+
+% 代码样式设置
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=single
+}
+
+% 设置默认代码样式
+\lstset{style=mystyle}
+
+% 更改图表标题语言
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
+
+\begin{document}
+
+\input{cover}
+
+% 新增格式说明
+\section*{Format Instructions}
+This article uses the following format to emphasize different types of information:
+\begin{itemize}
+    \item \textcolor{highlight}{\textbf{blue bold}}: important concepts or definitions
+    \item \textcolor{important}{\textbf{red bold}}: very important information
+    \item \textcolor{note}{\textit{green italic}}: additional explanation or comment
+    \item \underline{underline}: keywords or terms
+\end{itemize}
+
+%%%%%%%%% BODY TEXT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Parameters and Applications of Color Models}
+
+\subsection{RGB Color Model}
+RGB is an additive color model that produces various colors by combining three primary colors (Red, Green, Blue) at different intensities. In computer systems, each color component is typically represented using 8 bits (0-255).
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lp{12cm}}
+    \toprule
+    \textbf{Parameter} & \textbf{Description} \\
+    \midrule
+    Red (R) & Range 0-255, represents red light intensity. 0 means no red light, 255 means maximum red intensity \\
+    Green (G) & Range 0-255, represents green light intensity. 0 means no green light, 255 means maximum green intensity \\
+    Blue (B) & Range 0-255, represents blue light intensity. 0 means no blue light, 255 means maximum blue intensity \\
+    \bottomrule
+    \end{tabular}
+    \caption{Detailed RGB Color Model Parameters}
+\end{table}
+
+\subsubsection{RGB Storage in Computer Systems}
+In computer systems, RGB colors are typically stored in one of the following formats:
+\begin{itemize}
+    \item \textbf{24-bit True Color}: 8 bits per color component, totaling 24 bits
+    \item \textbf{32-bit Color}: 8 bits each for RGB, plus 8 bits for Alpha channel (transparency)
+\end{itemize}
+
+\begin{lstlisting}[language=python, caption=RGB Color Processing in Python]
+import numpy as np
+from PIL import Image
+
+# Create RGB image
+img = np.zeros((100, 100, 3), dtype=np.uint8)
+# Set red color
+img[:, :, 0] = 255  # Set R channel to maximum
+# Create PIL image object
+pil_img = Image.fromarray(img)
+\end{lstlisting}
+
+\subsection{CMY Color Model}
+CMY is a subtractive color model primarily used in printing and pigment mixing. Each parameter represents the degree of absorption of specific wavelengths of light.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lp{12cm}}
+    \toprule
+    \textbf{Parameter} & \textbf{Description} \\
+    \midrule
+    Cyan (C) & Range 0-100\%, absorbs red light. 0\% means no absorption, 100\% means complete absorption \\
+    Magenta (M) & Range 0-100\%, absorbs green light. 0\% means no absorption, 100\% means complete absorption \\
+    Yellow (Y) & Range 0-100\%, absorbs blue light. 0\% means no absorption, 100\% means complete absorption \\
+    \bottomrule
+    \end{tabular}
+    \caption{Detailed CMY Color Model Parameters}
+\end{table}
+
+\begin{lstlisting}[language=python, caption=CMY Conversion Example in OpenCV]
+import cv2
+import numpy as np
+
+def rgb_to_cmy(rgb_image):
+    # Normalize RGB values
+    rgb_normalized = rgb_image.astype(float) / 255.0
+    # Convert to CMY
+    cmy = 1 - rgb_normalized
+    return cmy
+\end{lstlisting}
+
+\subsection{HSV Color Model}
+HSV model describes colors in a way that aligns with human perception, making it more intuitive for human understanding.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lp{12cm}}
+    \toprule
+    \textbf{Parameter} & \textbf{Description} \\
+    \midrule
+    Hue (H) & Range 0°-360°, represents color type. 0° is red, 120° is green, 240° is blue \\
+    Saturation (S) & Range 0-100\%, represents color intensity. 0\% is grayscale, 100\% is pure color \\
+    Value (V) & Range 0-100\%, represents brightness. 0\% is black, 100\% is maximum brightness \\
+    \bottomrule
+    \end{tabular}
+    \caption{Detailed HSV Color Model Parameters}
+\end{table}
+
+\begin{lstlisting}[language=python, caption=HSV Color Detection in OpenCV]
+import cv2
+import numpy as np
+
+# Read image
+img = cv2.imread('image.jpg')
+# Convert to HSV space
+hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+# Define HSV range for red color
+lower_red = np.array([0, 100, 100])
+upper_red = np.array([10, 255, 255])
+
+# Create mask
+mask = cv2.inRange(hsv, lower_red, upper_red)
+\end{lstlisting}
+
+\section{Relationship Between CMY and RGB}
+
+\subsection{Mathematical Relationship}
+The RGB and CMY color spaces have an exact mathematical relationship, expressed as:
+
+\begin{equation}
+\begin{bmatrix}
+C\\
+M\\
+Y
+\end{bmatrix}
+=
+\begin{bmatrix}
+1\\
+1\\
+1
+\end{bmatrix}
+-
+\begin{bmatrix}
+R\\
+G\\
+B
+\end{bmatrix}
+\end{equation}
+
+\subsection{Physical Principles}
+\begin{itemize}
+    \item \textbf{RGB Principle}: Emits different wavelengths of light (additive)
+    \item \textbf{CMY Principle}: Absorbs different wavelengths of light (subtractive)
+    \item \textbf{Complementary Relationships}:
+        \begin{itemize}
+            \item Cyan (C) absorbs Red (R)
+            \item Magenta (M) absorbs Green (G)
+            \item Yellow (Y) absorbs Blue (B)
+        \end{itemize}
+\end{itemize}
+
+\subsection{Implementation Examples}
+\begin{lstlisting}[language=python, caption=Color Space Conversion Implementation]
+def rgb_to_cmy(r, g, b):
+    """
+    Convert RGB values to CMY values
+    Input: r,g,b (0-255)
+    Output: c,m,y (0-1)
+    """
+    # Normalize RGB values
+    r = r / 255.0
+    g = g / 255.0
+    b = b / 255.0
+    
+    # Convert to CMY
+    c = 1 - r
+    m = 1 - g
+    y = 1 - b
+    
+    return c, m, y
+
+def cmy_to_rgb(c, m, y):
+    """
+    Convert CMY values to RGB values
+    Input: c,m,y (0-1)
+    Output: r,g,b (0-255)
+    """
+    # Convert to RGB
+    r = (1 - c) * 255
+    g = (1 - m) * 255
+    b = (1 - y) * 255
+    
+    return int(r), int(g), int(b)
+\end{lstlisting}
+
+\subsection{Real-world Engineering Applications}
+\begin{itemize}
+    \item \textbf{Adobe Photoshop}: Simultaneous use of RGB and CMY
+    \begin{itemize}
+        \item Monitor preview uses RGB
+        \item Print output uses CMY(K)
+    \end{itemize}
+    \item \textbf{OpenCV}: Applications in Computer Vision
+    \begin{lstlisting}[language=python, caption=OpenCV Color Space Conversion]
+import cv2
+
+# Read RGB image
+rgb_img = cv2.imread('image.jpg')
+# Convert to CMYK (OpenCV uses BGR format)
+cmyk_img = cv2.cvtColor(rgb_img, cv2.COLOR_BGR2CMYK)
+    \end{lstlisting}
+    \item \textbf{Printer Drivers}: Real-time Color Conversion
+    \begin{itemize}
+        \item Receives RGB data
+        \item Converts to CMY(K) using ICC profiles
+        \item Performs color correction and optimization
+    \end{itemize}
+\end{itemize}
+
+\end{document}

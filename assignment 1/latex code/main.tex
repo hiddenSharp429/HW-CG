@@ -1,0 +1,187 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% main.tex
+% STU课程报告模板正文
+% 作者：ZiXian-Zhu
+% 该模板仓库地址GitHub：https://github.com/hiddenSharp429/STU_report_template
+% 参考来源：中科院论文模板、上海交通大学课程论文模板
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt]{article}
+
+\usepackage{STUReport}
+\usepackage{xcolor}
+\usepackage{tabulary}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning}
+
+% 新增颜色定义
+\definecolor{highlight}{RGB}{135,206,250} 
+\definecolor{important}{RGB}{255,0,0}
+\definecolor{note}{RGB}{0,128,0}
+
+% 更改图表标题语言
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
+
+\begin{document}
+
+\input{cover}
+
+% 新增格式说明
+\section*{Format Instructions}
+this article uses the following format to emphasize different types of information:
+\begin{itemize}
+    \item \textcolor{highlight}{\textbf{blue bold}}: important concepts or definitions
+    \item \textcolor{important}{\textbf{red bold}}: very important information
+    \item \textcolor{note}{\textit{green italic}}: additional explanation or comment
+    \item \underline{underline}: keywords or terms
+\end{itemize}
+
+%%%%%%%%% BODY TEXT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{What are raster graphics and vector graphics? What features they have, respectively?}\label{sec:1}
+
+\subsection{Raster Graphics vs. Vector Graphics}
+
+\textcolor{highlight}{\textbf{Raster graphics and vector graphics}} are two fundamental types of digital images, each with distinct characteristics:
+
+\begin{table}[h]
+\centering
+\begin{tabulary}{\textwidth}{|L|L|}
+\hline
+\textbf{Raster Graphics} & \textbf{Vector Graphics} \\
+\hline
+Composed of a grid of \underline{pixels} & Based on \underline{mathematical formulas} \\
+\textcolor{important}{\textbf{Resolution-dependent}} & \textcolor{important}{\textbf{Resolution-independent}} \\
+Ideal for complex, photorealistic images & Ideal for logos, illustrations, and typography \\
+Common formats: JPEG, PNG, GIF, TIFF & Common formats: SVG, AI, EPS \\
+\hline
+\end{tabulary}
+\caption{Comparison of Raster and Vector Graphics}
+\label{tab:raster-vs-vector}
+\end{table}
+
+\subsubsection{Raster Graphics Features}
+\begin{itemize}
+    \item Can represent subtle color gradations
+    \item \textcolor{note}{\textit{Larger file sizes for high-resolution images}}
+    \item Quality loss when scaling up
+    \item Well-suited for photographs and complex digital paintings
+    \item Editing affects pixels directly
+\end{itemize}
+
+\subsubsection{Vector Graphics Features}
+\begin{itemize}
+    \item \textcolor{highlight}{\textbf{Infinitely scalable without quality loss}}
+    \item Smaller file sizes for simple graphics
+    \item Easy to edit individual elements
+    \item Perfect for sharp edges and solid colors
+    \item \textcolor{note}{\textit{Can be easily converted to raster graphics, but not vice versa}}
+\end{itemize}
+
+% It would be beneficial to include a figure here comparing raster and vector graphics
+\begin{figure}[h]
+    \centering
+    % Include an image comparing raster and vector graphics
+    \caption{Comparison of Raster and Vector Graphics}
+    \label{fig:raster-vs-vector}
+\end{figure}
+
+\section{Draw architecture of a simple raster-graphics system and describe how it works.}\label{sec:2}
+A simple raster graphics system typically consists of the following components and works as described below:
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=2cm, auto, 
+    block/.style={rectangle, draw, text width=2cm, text centered, minimum height=1cm},
+    line/.style={draw, -latex'}]
+
+    \node [block] (input) {Input Devices (Mouse, Keyboard)};
+    \node [block, right=of input] (cpu) {CPU};
+    \node [block, right=of cpu] (gpu) {GPU};
+    \node [block, below=of cpu] (buffer) {Frame Buffer};
+    \node [block, below=of buffer] (controller) {Display Controller};
+    \node [block, below=of controller] (output) {Output Device (Monitor, Printer)};
+
+    \path [line] (input) -- (cpu);
+    \path [line] (cpu) -- (gpu);
+    \path [line] (cpu) -- (buffer);
+    \path [line] (gpu) -- (buffer);
+    \path [line] (buffer) -- (controller);
+    \path [line] (controller) -- (output);
+\end{tikzpicture}
+\caption{Architecture of a simple raster-graphics system}
+\label{fig:raster-system}
+\end{figure}
+
+\textcolor{highlight}{\textbf{A simple raster graphics system}} typically consists of the following components:
+
+\begin{table}[h]
+\centering
+\begin{tabulary}{\textwidth}{|L|L|}
+\hline
+\textbf{Component} & \textbf{Description} \\
+\hline
+Input Devices & Mouse, keyboard, graphics tablet \\
+CPU & Central Processing Unit \\
+GPU & Graphics Processing Unit \\
+Frame Buffer & Temporary storage for rendered image \\
+Display Controller & Manages output to display device \\
+Output Device & Monitor, printer \\
+\hline
+\end{tabulary}
+\caption{Components of a Raster Graphics System}
+\label{tab:raster-system-components}
+\end{table}
+
+\textcolor{important}{\textbf{The system works as follows:}}
+\begin{enumerate}
+    \item User input is received through input devices
+    \item The CPU processes the input and sends instructions to the GPU
+    \item The GPU renders the image and stores it in the frame buffer
+    \item The display controller reads from the frame buffer and sends signals to the output device
+    \item The output device displays the rendered image
+\end{enumerate}
+
+% A diagram of this architecture would be very helpful here
+
+\section{As we know, there are many kinds of graphics software in use in practice. Please list at least 4 kinds of graphics software for different application purpose.}\label{sec:3}
+
+Graphics software plays a crucial role in various industries. Here are five major categories of graphics software, each serving different purposes:
+
+\subsection{Raster Graphics Editors}
+\begin{itemize}
+    \item \textbf{Purpose:} \textcolor{highlight}{\textbf{Photo editing, digital painting, image manipulation, texture creation}}
+    \item \textbf{Key Features:} Layer-based editing, filter libraries, brush customization, color correction
+    \item \textbf{Examples:} Adobe Photoshop, GIMP, Corel Painter, Affinity Photo
+\end{itemize}
+
+\subsection{Vector Graphics Editors}
+\begin{itemize}
+    \item \textbf{Purpose:} \textcolor{highlight}{\textbf{Logo design, illustrations, typography, scalable graphics}}
+    \item \textbf{Key Features:} Path editing, shape tools, advanced typography, SVG support
+    \item \textbf{Examples:} Adobe Illustrator, Inkscape, CorelDRAW, Affinity Designer
+\end{itemize}
+
+\subsection{3D Modeling and Animation Software}
+\begin{itemize}
+    \item \textbf{Purpose:} \textcolor{highlight}{\textbf{3D modeling, animation, visual effects, game asset creation}}
+    \item \textbf{Key Features:} Polygon modeling, rigging, texturing, particle systems, rendering engines
+    \item \textbf{Examples:} Autodesk Maya, Blender, Cinema 4D, 3ds Max
+\end{itemize}
+
+\subsection{Computer-Aided Design (CAD) Software}
+\begin{itemize}
+    \item \textbf{Purpose:} \textcolor{highlight}{\textbf{Technical drawings, architectural design, product design}}
+    \item \textbf{Key Features:} Precise measurements, 3D solid modeling, parametric design, simulation tools
+    \item \textbf{Examples:} AutoCAD, SolidWorks, Fusion 360, Rhino
+\end{itemize}
+
+\subsection{Desktop Publishing Software}
+\begin{itemize}
+    \item \textbf{Purpose:} \textcolor{highlight}{\textbf{Page layout, document design, print media creation}}
+    \item \textbf{Key Features:} Master pages, text flow, style sheets, typography controls, print preparation
+    \item \textbf{Examples:} Adobe InDesign, QuarkXPress, Scribus, Affinity Publisher
+\end{itemize}
+
+\end{document}

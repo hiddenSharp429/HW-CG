@@ -1,0 +1,435 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% main.tex
+% STU课程报告模板正文
+% 作者：ZiXian-Zhu
+% 该模板仓库地址GitHub：https://github.com/hiddenSharp429/STU_report_template
+% 参考来源：中科院论文模板、上海交通大学课程论文模板
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt]{article}
+
+\usepackage{STUReport}
+\usepackage{xcolor}
+\usepackage{tabulary}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usetikzlibrary{shapes,arrows,positioning}
+
+% 新增颜色定义
+\definecolor{highlight}{RGB}{135,206,250} 
+\definecolor{important}{RGB}{255,0,0}
+\definecolor{note}{RGB}{0,128,0}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% 定义C#语言
+\lstdefinelanguage{csharp}{
+  language=[Sharp]C,
+  morekeywords={var,string,get,set,class,namespace,new,using,this,public,private,protected,virtual,override},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+}
+
+% 定义JavaScript语言
+\lstdefinelanguage{js}{
+  keywords={break,case,catch,continue,debugger,default,delete,do,else,false,finally,for,function,if,in,instanceof,new,null,return,switch,this,throw,true,try,typeof,var,void,while,with},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  sensitive=true
+}
+
+% 代码样式设置
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=single
+}
+
+% 设置默认代码样式
+\lstset{style=mystyle}
+
+% 更改图表标题语言
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
+
+\begin{document}
+
+\input{cover}
+
+% 新增格式说明
+\section*{Format Instructions}
+this article uses the following format to emphasize different types of information:
+\begin{itemize}
+    \item \textcolor{highlight}{\textbf{blue bold}}: important concepts or definitions
+    \item \textcolor{important}{\textbf{red bold}}: very important information
+    \item \textcolor{note}{\textit{green italic}}: additional explanation or comment
+    \item \underline{underline}: keywords or terms
+\end{itemize}
+
+%%%%%%%%% BODY TEXT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Theoretical and Practical Analysis of 2D and 3D Transformations}\label{sec:transformations}
+
+\subsection{Mathematical Foundation}
+
+\textcolor{highlight}{\textbf{Transformation matrices}} are the fundamental building blocks for both 2D and 3D transformations. Let's examine their mathematical representations:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ccc}
+\toprule
+\textbf{Operation} & \textbf{2D Matrix} & \textbf{3D Matrix} \\
+\midrule
+Translation & 
+$\begin{bmatrix} 
+1 & 0 & t_x \\
+0 & 1 & t_y \\
+0 & 0 & 1
+\end{bmatrix}$ & 
+$\begin{bmatrix}
+1 & 0 & 0 & t_x \\
+0 & 1 & 0 & t_y \\
+0 & 0 & 1 & t_z \\
+0 & 0 & 0 & 1
+\end{bmatrix}$ \\
+\midrule
+Scaling & 
+$\begin{bmatrix}
+s_x & 0 & 0 \\
+0 & s_y & 0 \\
+0 & 0 & 1
+\end{bmatrix}$ &
+$\begin{bmatrix}
+s_x & 0 & 0 & 0 \\
+0 & s_y & 0 & 0 \\
+0 & 0 & s_z & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix}$ \\
+\midrule
+Rotation & 
+$\begin{bmatrix}
+\cos\theta & -\sin\theta & 0 \\
+\sin\theta & \cos\theta & 0 \\
+0 & 0 & 1
+\end{bmatrix}$ &
+\textit{See rotation matrices below} \\
+\bottomrule
+\end{tabular}
+\caption{Basic Transformation Matrices}
+\label{tab:transformation-matrices}
+\end{table}
+
+\subsection{3D Rotation Matrices}
+For 3D rotations, we have three fundamental rotation matrices around each axis:
+
+\begin{enumerate}
+    \item \textcolor{highlight}{\textbf{X-axis Rotation}}:
+    \[
+    R_x(\theta) = \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & \cos\theta & -\sin\theta & 0 \\
+    0 & \sin\theta & \cos\theta & 0 \\
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+    \]
+
+    \item \textcolor{highlight}{\textbf{Y-axis Rotation}}:
+    \[
+    R_y(\theta) = \begin{bmatrix}
+    \cos\theta & 0 & \sin\theta & 0 \\
+    0 & 1 & 0 & 0 \\
+    -\sin\theta & 0 & \cos\theta & 0 \\
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+    \]
+
+    \item \textcolor{highlight}{\textbf{Z-axis Rotation}}:
+    \[
+    R_z(\theta) = \begin{bmatrix}
+    \cos\theta & -\sin\theta & 0 & 0 \\
+    \sin\theta & \cos\theta & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+    \]
+\end{enumerate}
+
+\subsection{Key Theoretical Differences}
+
+\begin{table}[h]
+\centering
+\begin{tabulary}{\textwidth}{LL}
+\toprule
+\textbf{2D Transformations} & \textbf{3D Transformations} \\
+\midrule
+Uses 3×3 homogeneous matrices & Uses 4×4 homogeneous matrices \\
+Single rotation angle (around Z-axis) & Three rotation angles (Euler angles) or quaternions \\
+Simpler perspective transformations & Complex perspective projections \\
+No depth considerations & Requires Z-buffer for depth handling \\
+\textcolor{note}{\textit{Linear computational complexity}} & \textcolor{note}{\textit{Higher computational complexity}} \\
+\bottomrule
+\end{tabulary}
+\caption{Theoretical Comparison of 2D and 3D Transformations}
+\label{tab:theoretical-comparison}
+\end{table}
+
+\subsection{Advanced Concepts}
+
+\subsubsection{Homogeneous Coordinates}
+\textcolor{important}{\textbf{Homogeneous coordinates}} are essential for both 2D and 3D transformations:
+\begin{itemize}
+    \item 2D point: $(x, y, w)$ where actual coordinates are $(x/w, y/w)$
+    \item 3D point: $(x, y, z, w)$ where actual coordinates are $(x/w, y/w, z/w)$
+    \item \textcolor{note}{\textit{Enables representation of infinite points and perspective transformations}}
+\end{itemize}
+
+\subsubsection{Quaternions in 3D Rotation}
+\textcolor{important}{\textbf{Quaternions}} offer several advantages over Euler angles:
+\begin{itemize}
+    \item Avoid gimbal lock
+    \item Smoother interpolation
+    \item More compact representation
+    \item Quaternion: $q = w + xi + yj + zk$ where $i^2 = j^2 = k^2 = ijk = -1$
+\end{itemize}
+
+\subsection{Practical Implementation Considerations}
+
+\begin{table}[h]
+\centering
+\begin{tabulary}{\textwidth}{LLL}
+\toprule
+\textbf{Aspect} & \textbf{2D Implementation} & \textbf{3D Implementation} \\
+\midrule
+Memory Usage & 9 floating-point numbers & 16 floating-point numbers \\
+Matrix Chain & Simple concatenation & Complex multiplication order \\
+Performance & Fast, CPU-efficient & Often requires GPU acceleration \\
+Precision & Less affected by floating-point errors & More susceptible to numerical errors \\
+\bottomrule
+\end{tabulary}
+\caption{Implementation Considerations}
+\label{tab:implementation-comparison}
+\end{table}
+
+\subsection{Common Applications and Use Cases}
+
+\begin{enumerate}
+    \item \textcolor{highlight}{\textbf{2D Applications}}:
+        \begin{itemize}
+            \item User interface elements
+            \item Document layout
+            \item 2D game sprites
+            \item Vector graphics
+        \end{itemize}
+    
+    \item \textcolor{highlight}{\textbf{3D Applications}}:
+        \begin{itemize}
+            \item Virtual reality
+            \item 3D modeling and animation
+            \item Scientific visualization
+            \item Computer-aided design
+        \end{itemize}
+\end{enumerate}
+
+\subsection{Performance Optimization Techniques}
+
+\begin{enumerate}
+    \item \textcolor{important}{\textbf{Matrix Optimization}}:
+        \begin{itemize}
+            \item Pre-computing common transformations
+            \item Using specialized SIMD instructions
+            \item Batch processing of transformations
+        \end{itemize}
+    
+    \item \textcolor{important}{\textbf{Memory Management}}:
+        \begin{itemize}
+            \item Efficient matrix storage formats
+            \item Cache-friendly data structures
+            \item Memory alignment for SIMD operations
+        \end{itemize}
+\end{enumerate}
+
+\subsection{Code Implementation Examples}
+
+\subsubsection{OpenGL Matrix Operations}
+\begin{figure}[H]
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=C++, caption=OpenGL Matrix Transformations]
+// 2D Translation
+glm::mat3 transform2D = glm::translate(
+    glm::mat3(1.0f), glm::vec2(x, y));
+
+// 3D Translation with Rotation
+glm::mat4 transform3D = glm::translate(
+    glm::mat4(1.0f), glm::vec3(x, y, z));
+transform3D = glm::rotate(
+    transform3D, angle, glm::vec3(0,1,0));
+\end{lstlisting}
+\end{minipage}
+\end{figure}
+
+\subsubsection{Quaternion Rotation (Unity)}
+\begin{figure}[H]
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=csharp, caption=Unity Quaternion Operations]
+// Creating a rotation
+Quaternion rotation = Quaternion.Euler(x, y, z);
+transform.rotation = rotation;
+
+// Smooth rotation interpolation
+transform.rotation = Quaternion.Slerp(
+    startRotation, endRotation, time);
+\end{lstlisting}
+\end{minipage}
+\end{figure}
+
+\subsubsection{Python Implementation}
+\begin{figure}[H]
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, caption=Python Matrix Operations]
+import numpy as np
+
+# 2D Rotation Matrix
+def rotation_matrix_2d(theta):
+    return np.array([
+        [np.cos(theta), -np.sin(theta)],
+        [np.sin(theta),  np.cos(theta)]
+    ])
+
+# 3D Rotation Matrix (around Y-axis)
+def rotation_matrix_3d_y(theta):
+    return np.array([
+        [ np.cos(theta), 0, np.sin(theta)],
+        [            0, 1,            0],
+        [-np.sin(theta), 0, np.cos(theta)]
+    ])
+\end{lstlisting}
+\end{minipage}
+\end{figure}
+
+\section{Practical Implementation of 2D and 3D Transformations}\label{sec:transformations}
+
+\subsection{Popular Graphics Libraries and Frameworks}
+Let's examine how different software implementations handle transformations:
+
+\begin{enumerate}
+    \item \textcolor{highlight}{\textbf{OpenGL}}:
+        \begin{itemize}
+            \item 2D: \texttt{glTranslatef(x, y, 0.0f)} for translation
+            \item 3D: \texttt{glm::translate(model, glm::vec3(x, y, z))}
+            \item \textcolor{note}{\textit{Uses GLM (OpenGL Mathematics) for matrix operations}}
+        \end{itemize}
+    
+    \item \textcolor{highlight}{\textbf{Three.js (WebGL Framework)}}:
+        \begin{itemize}
+            \item 2D: \texttt{mesh.position.set(x, y, 0)}
+            \item 3D: \texttt{mesh.position.set(x, y, z)}
+            \item Rotation: \texttt{mesh.rotation.set(pitch, yaw, roll)}
+            \item \textcolor{note}{\textit{Provides intuitive JavaScript API for 3D graphics}}
+        \end{itemize}
+        
+    \item \textcolor{highlight}{\textbf{Unity Game Engine}}:
+        \begin{itemize}
+            \item 2D: \texttt{transform.Translate(new Vector2(x, y))}
+            \item 3D: \texttt{transform.Translate(new Vector3(x, y, z))}
+            \item \textcolor{note}{\textit{Supports both 2D and 3D game development}}
+        \end{itemize}
+\end{enumerate}
+
+\subsection{Real-world Applications}
+
+\begin{enumerate}
+    \item \textcolor{important}{\textbf{Blender (Open Source 3D Software)}}:
+        \begin{itemize}
+            \item Uses quaternions for rotation: \texttt{obj.rotation\_quaternion}
+            \item Matrix transformation: \texttt{obj.matrix\_world}
+            \item Python API: \texttt{bpy.ops.transform}
+        \end{itemize}
+    
+    \item \textcolor{important}{\textbf{AutoCAD}}:
+        \begin{itemize}
+            \item 2D commands: \texttt{MOVE}, \texttt{ROTATE}, \texttt{SCALE}
+            \item 3D commands: \texttt{3DROTATE}, \texttt{3DSCALE}
+            \item \textcolor{note}{\textit{Uses World Coordinate System (WCS)}}
+        \end{itemize}
+        
+    \item \textcolor{important}{\textbf{Processing}}:
+        \begin{itemize}
+            \item 2D: \texttt{translate(x, y)}, \texttt{rotate(angle)}
+            \item 3D: \texttt{translate(x, y, z)}, \texttt{rotateX/Y/Z(angle)}
+            \item \textcolor{note}{\textit{Popular for creative coding and visualization}}
+        \end{itemize}
+\end{enumerate}
+
+\subsection{Implementation Differences}
+
+\begin{enumerate}
+    \item \textcolor{highlight}{\textbf{Matrix Operations}}:
+        \begin{itemize}
+            \item 2D: OpenCV's \texttt{cv2.getRotationMatrix2D()}
+            \item 3D: Eigen library's \texttt{Affine3d}
+        \end{itemize}
+    
+    \item \textcolor{highlight}{\textbf{Performance Considerations}}:
+        \begin{itemize}
+            \item 2D: DirectX's \texttt{D2D1::Matrix3x2F}
+            \item 3D: NVIDIA CUDA for parallel matrix operations
+        \end{itemize}
+    
+    \item \textcolor{highlight}{\textbf{Graphics APIs}}:
+        \begin{itemize}
+            \item Vulkan: Low-level control with explicit matrix math
+            \item Metal: Apple's framework for optimized transformations
+        \end{itemize}
+\end{enumerate}
+
+\subsection{Practical Examples}
+
+\begin{enumerate}
+    \item \textbf{2D Game Development (PyGame)}:
+    \begin{figure}[H]
+    \begin{minipage}{\linewidth}
+    \begin{lstlisting}[language=Python, caption=PyGame 2D Game Development]
+    # 2D Sprite rotation
+    sprite.angle += 45  # Rotate 45 degrees
+    sprite.scale = (2, 2)  # Double size
+    \end{lstlisting}
+    \end{minipage}
+    \end{figure}
+
+    \item \textbf{3D Animation (Three.js)}:
+    \begin{figure}[H]
+    \begin{minipage}{\linewidth}
+    \begin{lstlisting}[language=js, caption=Three.js 3D Animation]
+    // 3D Object manipulation
+    object.rotation.x += 0.01;
+    object.position.z += 5;
+    object.scale.set(2, 2, 2);
+    \end{lstlisting}
+    \end{minipage}
+    \end{figure}
+\end{enumerate}
+
+\end{document}
