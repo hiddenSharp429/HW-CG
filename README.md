@@ -87,6 +87,7 @@ The following are the task descriptions for each project:
 ## Project 2
 - 任务：完成以下目标并且提交相关文件。
 > rep:https://github.com/Natario/OpenGLRacing
+> 
 The purpose of this research project is to train on the following skills:
 1. Computer graphics programing and debugging skill (be patient and have passion!)
 2. Documentation and program style
