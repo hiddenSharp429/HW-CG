@@ -83,3 +83,31 @@ The following are the task descriptions for each project:
 > 1. Design and implement a screensaver with OpenGL functions of output primitives (points, lines and fill areas), attributes and transformations.Example:
 
 ![alt text](img/project1.png)
+
+## Project 2
+- 任务：完成以下目标并且提交相关文件。
+> rep:https://github.com/Natario/OpenGLRacing
+The purpose of this research project is to train on the following skills:
+1. Computer graphics programing and debugging skill (be patient and have passion!)
+2. Documentation and program style
+3. Problem solving by searching skill
+4. Slef-study skill
+5. English writing skill
+
+Find an open source project to study by yourself, for example:
+http://www.mbsoftworks.sk/index.php?page=demos
+http://nehe.gamedev.net/tutorial/lessons_01__05/22004/
+
+Search by Google (or bing) with keywords: openGL tutorial, openGL example, openGL demo, openGL open source project
+
+You need to run the project successfully (for demo on week 16th) and understand the basic function of each modules (or functions). Write a report on how it works.
+
+Hint: The project should not be too simple, neither too difficult.
+
+The research report ( in PDF file) should include:
+1. What is the goal of the project
+2. How it works ( main part of the report)
+3. What you do
+4. A picture for simple result Demo
+5. Conclusion (or summary) on what your learn.
+
