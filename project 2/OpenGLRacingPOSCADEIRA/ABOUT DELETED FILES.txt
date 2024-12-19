@@ -1,0 +1,1 @@
+some files were not needed to compile this version of the game, so I deleted them (e.g. some folders and textures). To see them check the Dropbox folder

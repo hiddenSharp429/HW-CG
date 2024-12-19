@@ -1,0 +1,12 @@
+the big size is probably because of Visual Studio's pre-compiled headers:
+
+https://stackoverflow.com/questions/19398287/ipch-files-on-a-visual-studio-project
+
+
+as mentioned online, you can safely delete these folders:
+cglib.vsnet\ipch
+cglib.vsnet\.vs\cglib\v17\ipch
+OpenGLRacingPOSCADEIRA\cglib.vsnet\ipch
+OpenGLRacingPOSCADEIRA\cglib.vsnet\.vs\cglib\v17\ipch
+
+(and probably other files and folders as well... but check online first)

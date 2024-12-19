@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DB208478-3FD3-4D8B-86F8-8AA0460150B5}</ProjectGuid>
+    <RootNamespace>cglib</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\cglib\include;..\..\cglib\include\cg;..\..\glut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>..\..\cglib\include;..\..\cglib\include\cg;..\..\glut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\cglib\src\Application.cpp" />
+    <ClCompile Include="..\..\cglib\src\DebugFile.cpp" />
+    <ClCompile Include="..\..\cglib\src\DebugNotifier.cpp" />
+    <ClCompile Include="..\..\cglib\src\DrawNotifier.cpp" />
+    <ClCompile Include="..\..\cglib\src\DrawOverlayNotifier.cpp" />
+    <ClCompile Include="..\..\cglib\src\Group.cpp" />
+    <ClCompile Include="..\..\cglib\src\KeyboardEventNotifier.cpp" />
+    <ClCompile Include="..\..\cglib\src\KeyBuffer.cpp" />
+    <ClCompile Include="..\..\cglib\src\Manager.cpp" />
+    <ClCompile Include="..\..\cglib\src\MouseEventNotifier.cpp" />
+    <ClCompile Include="..\..\cglib\src\Properties.cpp" />
+    <ClCompile Include="..\..\cglib\src\Registry.cpp" />
+    <ClCompile Include="..\..\cglib\src\ReshapeEventNotifier.cpp" />
+    <ClCompile Include="..\..\cglib\src\UpdateNotifier.cpp" />
+    <ClCompile Include="..\..\cglib\src\Util.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\cglib\include\Application.h" />
+    <ClInclude Include="..\..\cglib\include\cg.h" />
+    <ClInclude Include="..\..\cglib\include\CommandQueue.h" />
+    <ClInclude Include="..\..\cglib\include\DebugFile.h" />
+    <ClInclude Include="..\..\cglib\include\DebugNotifier.h" />
+    <ClInclude Include="..\..\cglib\include\DrawNotifier.h" />
+    <ClInclude Include="..\..\cglib\include\DrawOverlayNotifier.h" />
+    <ClInclude Include="..\..\cglib\include\Entity.h" />
+    <ClInclude Include="..\..\cglib\include\Group.h" />
+    <ClInclude Include="..\..\cglib\include\GroupDebug.h" />
+    <ClInclude Include="..\..\cglib\include\GroupDraw.h" />
+    <ClInclude Include="..\..\cglib\include\GroupDrawOverlay.h" />
+    <ClInclude Include="..\..\cglib\include\GroupKeyboardEvent.h" />
+    <ClInclude Include="..\..\cglib\include\GroupMouseEvent.h" />
+    <ClInclude Include="..\..\cglib\include\GroupReshapeEvent.h" />
+    <ClInclude Include="..\..\cglib\include\GroupUpdate.h" />
+    <ClInclude Include="..\..\cglib\include\IDebugListener.h" />
+    <ClInclude Include="..\..\cglib\include\IDrawListener.h" />
+    <ClInclude Include="..\..\cglib\include\IDrawOverlayListener.h" />
+    <ClInclude Include="..\..\cglib\include\IKeyboardEventListener.h" />
+    <ClInclude Include="..\..\cglib\include\IMouseEventListener.h" />
+    <ClInclude Include="..\..\cglib\include\IReshapeEventListener.h" />
+    <ClInclude Include="..\..\cglib\include\IUpdateListener.h" />
+    <ClInclude Include="..\..\cglib\include\KeyboardEventNotifier.h" />
+    <ClInclude Include="..\..\cglib\include\KeyBuffer.h" />
+    <ClInclude Include="..\..\cglib\include\Manager.h" />
+    <ClInclude Include="..\..\cglib\include\MouseEventNotifier.h" />
+    <ClInclude Include="..\..\cglib\include\Notifier.h" />
+    <ClInclude Include="..\..\cglib\include\Properties.h" />
+    <ClInclude Include="..\..\cglib\include\Registry.h" />
+    <ClInclude Include="..\..\cglib\include\ReshapeEventNotifier.h" />
+    <ClInclude Include="..\..\cglib\include\Singleton.h" />
+    <ClInclude Include="..\..\cglib\include\State.h" />
+    <ClInclude Include="..\..\cglib\include\Test.h" />
+    <ClInclude Include="..\..\cglib\include\TestSuite.h" />
+    <ClInclude Include="..\..\cglib\include\UpdateNotifier.h" />
+    <ClInclude Include="..\..\cglib\include\Util.h" />
+    <ClInclude Include="..\..\cglib\include\Vector.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
