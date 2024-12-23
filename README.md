@@ -74,6 +74,22 @@ effect, use different shades of red and yellow (and perhaps green) for the point
 
 - 文件夹：`assignment 8`
 
+## Assignment 9
+- 任务：完成以下目标并且提交相关文件。
+
+Test the code samples (from textbook) on openGL
+1) mouse functions (textbook p633, p635 or Interactive Input Methods and Graphical User Interfaces.pdf, pp11,pp14),
+![alt text](img/assignment9_1_1.png)
+![alt text](img/assignment9_1_2.png)
+2) keyboard functions (textbook p637, p639 or Interactive Input Methods and Graphical User Interfaces.pdf, pp15,pp17) and
+![alt text](img/assignment9_2_1.png)
+![alt text](img/assignment9_2_2.png)
+1) menu functions (textbook p649, p652 or Interactive Input Methods and Graphical User Interfaces.pdf, pp27,pp30), respectely.
+![alt text](img/assignment9_3_1.png)
+![alt text](img/assignment9_3_2.png)
+
+Write down comments on new openGL functions for their usage in your codes. Please refer to textbook. All are in English. 
+
 # Projects
 The following are the task descriptions for each project:
 
